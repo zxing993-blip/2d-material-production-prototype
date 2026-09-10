@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>图生图配置｜具身资产管理系统</title>
+  <link rel="stylesheet" href="../cloud-blue-b2b/tokens.css">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body class="config-modal-page">
+  <main class="config-modal-backdrop">
+    <section class="config-modal" role="dialog" aria-modal="true" aria-labelledby="configTitle">
+      <header class="config-modal-header">
+        <div><h1 id="configTitle">图生图配置</h1><p>为通过原图创建图生图处理任务</p></div>
+        <a class="config-close" href="quality.html" aria-label="关闭">×</a>
+      </header>
+      <form id="imageConfigForm">
+        <div class="config-dialog-body">
+          <div class="config-task-summary"><strong id="configName">人体工学办公椅</strong><span id="configCategory">家具</span><i></i><span>已通过原图 <b id="approvedInputCount">8 张</b></span></div>
+          <div class="config-modal-grid">
+            <label class="config-prompt-field"><span>Prompt 模板 <em>可编辑</em></span><textarea id="promptContent" maxlength="1000">以参考原图为主体，保留物品外观、材质、结构和比例；生成干净完整的单物品图像，背景简洁。</textarea><small>模板内容将直接用于本次任务。</small></label>
+            <div class="config-side-fields">
+              <label class="form-field"><span>模型版本</span><select id="modelVersion"><option>千问图生图 v1.0</option><option>混元图生图 v1.0</option></select></label>
+              <div class="form-field"><span>目标视角 <b>*</b></span><div class="view-options" id="viewOptions"><button type="button" class="active" data-view="主视角">主视角</button><button type="button" data-view="45°">45°</button><button type="button" data-view="俯角">俯角</button></div></div>
+              <label class="form-field config-reference"><span>参考图（可选）</span><input type="file" accept="image/png,image/jpeg,image/webp"><small>支持 PNG、JPG、JPEG、WEBP。</small></label>
+            </div>
+          </div>
+        </div>
+        <footer class="config-modal-footer"><span id="inputOutputRule">输入 8 张 → 目标输出 8 张 · 1024×1024 · 1:1</span><div><a class="ghost-btn" href="quality.html">取消</a><button type="submit" class="primary-btn">提交图生图任务</button></div></footer>
+      </form>
+    </section>
+  </main>
+  <div class="toast" id="configToast" role="status"></div>
+  <script src="image-to-image.js"></script>
+</body>
+</html>

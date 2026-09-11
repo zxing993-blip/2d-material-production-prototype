@@ -101,9 +101,9 @@
         <div class="modal-body upload-form-body">
           <label class="form-field"><span>物品名称 <b>*</b></span><input id="itemName" name="itemName" maxlength="50" placeholder="请输入物品名称" required></label>
           <label class="form-field"><span>备注</span><textarea id="taskRemark" name="taskRemark" maxlength="100" placeholder="可填写用途、重点关注事项等（选填）"></textarea></label>
-          <div class="form-field"><span>上传图片 <b>*</b></span><div class="upload-dropzone"><input id="imageFiles" name="imageFiles" type="file" accept="image/png,image/jpeg,image/webp" multiple><input id="imageFolder" name="imageFolder" type="file" webkitdirectory directory multiple><svg><use href="#i-upload"/></svg><strong>上传图片或图片文件夹</strong><small>仅支持 PNG、JPG、JPEG、WEBP；文件夹内含其他格式时不可提交</small><div class="upload-picker-actions"><button type="button" class="ghost-btn" id="chooseImages">选择图片</button><button type="button" class="ghost-btn" id="chooseFolder">选择文件夹</button></div><em id="uploadCount" aria-live="polite">尚未选择图片</em></div></div>
+          <div class="form-field"><span>上传图片文件夹 <b>*</b></span><div class="upload-dropzone"><input id="imageFolder" name="imageFolder" type="file" webkitdirectory directory multiple><svg><use href="#i-upload"/></svg><strong>选择图片文件夹</strong><small>支持 PNG、JPG、JPEG、WEBP；选择后自动检测每张图片是否可用</small><div class="upload-picker-actions"><button type="button" class="ghost-btn" id="chooseFolder">选择文件夹</button></div><div class="upload-check-result empty" id="uploadCount" aria-live="polite">尚未选择文件夹</div></div></div>
         </div>
-        <footer><button type="button" class="ghost-btn modal-close">取消</button><button type="submit" class="primary-btn">提交并开始上传</button></footer>
+        <footer><button type="button" class="ghost-btn modal-close">取消</button><button id="submitUpload" type="submit" class="primary-btn" disabled>提交并开始上传</button></footer>
       </form>
     </section>
   </div>

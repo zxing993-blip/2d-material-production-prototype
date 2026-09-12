@@ -19,6 +19,7 @@ const generatedItems = Array.from({ length: 8 }, (_, index) => {
 });
 
 const generatedGrid = document.querySelector('#generatedGrid');
+const generatedTaskFilter = new URLSearchParams(location.search).get('task');
 const generatedStatusFilter = document.querySelector('#generatedStatusFilter');
 const generatedSearch = document.querySelector('#generatedSearch');
 const generatedOwnerFilter = document.querySelector('#generatedOwnerFilter');
@@ -64,6 +65,7 @@ function filteredGeneratedItems() {
   const keyword = generatedSearch.value.trim().toLowerCase();
   const owner = generatedOwnerFilter.value;
   return generatedItems.filter((item) =>
+    (!generatedTaskFilter || item.taskId === generatedTaskFilter) &&
     (generatedStatusFilter.value === 'all' || item.status === generatedStatusFilter.value) &&
     (!keyword || item.name.toLowerCase().includes(keyword)) &&
     (owner === 'all' || item.owner === owner)
@@ -287,9 +289,14 @@ document.querySelector('#generatedPreviewApprove').addEventListener('click', () 
 document.querySelector('#generatedPreviewReject').addEventListener('click', () => setGeneratedStatus([previewItemId], 'rejected', true));
 document.addEventListener('keydown', (event) => {
   if (generatedPreviewModal.hidden) return;
-  if (event.key === 'Escape') closeGeneratedPreview();
-  if (event.key === 'ArrowLeft') moveGeneratedPreview(-1);
-  if (event.key === 'ArrowRight') moveGeneratedPreview(1);
+  if (['INPUT', 'TEXTAREA', 'SELECT'].includes(document.activeElement.tagName)) return;
+  if (event.key === 'Escape') return closeGeneratedPreview();
+  if (event.key === 'ArrowLeft') return moveGeneratedPreview(-1);
+  if (event.key === 'ArrowRight') return moveGeneratedPreview(1);
+  const item = generatedItems.find((row) => row.id === previewItemId);
+  if (!item || item.status !== 'pending') return;
+  if (event.key.toLowerCase() === 'a') setGeneratedStatus([previewItemId], 'approved', true);
+  if (event.key === 'Delete') setGeneratedStatus([previewItemId], 'rejected', true);
 });
 
 renderGenerated();

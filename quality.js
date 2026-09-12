@@ -1,4 +1,7 @@
 const tabButtons=document.querySelectorAll('.quality-tabs button'),tabPanes=document.querySelectorAll('.quality-pane');
 function activateTab(tab){const button=[...tabButtons].find(item=>item.dataset.tab===tab);if(!button)return;tabButtons.forEach(item=>item.classList.toggle('active',item===button));tabPanes.forEach(pane=>pane.classList.toggle('active',pane.dataset.pane===tab))}
 tabButtons.forEach(button=>button.addEventListener('click',()=>activateTab(button.dataset.tab)));
-activateTab(new URLSearchParams(location.search).get('tab')||'source');
+const qualityParams=new URLSearchParams(location.search),qualityTab=qualityParams.get('tab')||'source',qualityTask=qualityParams.get('task');
+const qualityTaskMeta={'2D-20260910-00126':{name:'人体工学办公椅',owner:'陈建模',source:'待决策 3 张',generated:'未处理 6 张'},'2D-20260910-00123':{name:'工业金属工具柜',owner:'王岩',source:'待决策 3 张',generated:'未处理 2 张'}};
+activateTab(qualityTab);
+if(qualityTask&&qualityTaskMeta[qualityTask]){const meta=qualityTaskMeta[qualityTask],isSource=qualityTab==='source';if(isSource){document.querySelector('#reviewSearch').value=meta.name;document.querySelector('#reviewOwnerFilter').value=meta.owner;document.querySelector('#reviewStatusFilter').value='pending';document.querySelector('#reviewSearch').dispatchEvent(new Event('input'));}else{document.querySelector('#generatedSearch').value=meta.name;document.querySelector('#generatedOwnerFilter').value=meta.owner;document.querySelector('#generatedStatusFilter').value='pending';document.querySelector('#generatedSearch').dispatchEvent(new Event('input'));}setTimeout(()=>document.querySelector(isSource?'[data-pane="source"] .review-panel':'[data-pane="generated"] .review-panel')?.scrollIntoView({block:'start',behavior:'smooth'}),80)}

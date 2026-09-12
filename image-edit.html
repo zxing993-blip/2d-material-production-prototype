@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>编辑图配置｜具身资产管理系统</title>
+  <link rel="stylesheet" href="../cloud-blue-b2b/tokens.css">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body class="config-modal-page">
+  <main class="config-modal-backdrop">
+    <section class="config-modal" role="dialog" aria-modal="true" aria-labelledby="editConfigTitle">
+      <header class="config-modal-header">
+        <div><h1 id="editConfigTitle">统一编辑规则</h1><p>为已选图片批量创建编辑图处理任务</p></div>
+        <a class="config-close" href="quality.html" aria-label="关闭">×</a>
+      </header>
+      <form id="imageEditForm">
+        <div class="config-dialog-body">
+          <div class="config-task-summary"><strong id="editConfigName">人体工学办公椅</strong><span id="editConfigTask">2D-20260910-00126</span><i></i><span>已选编辑图 <b id="editInputCount">3 张</b></span></div>
+          <div class="config-modal-grid">
+            <label class="config-prompt-field"><span>统一编辑规则 <em>可编辑</em></span><textarea id="editRuleContent" maxlength="1000">提取图片中的单一物品主体，移除原始拍摄背景，替换为干净白底；保留物品完整轮廓、材质和结构细节，避免遮挡与多余元素。</textarea><small>该规则将应用于本次选中的全部图片，并保存为处理快照。</small></label>
+            <div class="config-side-fields">
+              <label class="form-field"><span>编辑模型</span><input value="图片编辑 v1.0（默认）" readonly></label>
+              <div class="form-field"><span>生成视角 <b>*</b></span><div class="view-options" id="editViewOptions"><button type="button" class="active" data-view="保持原视角">保持原视角</button><button type="button" data-view="主视角">主视角</button><button type="button" data-view="45°">45°</button></div></div>
+            </div>
+          </div>
+        </div>
+        <footer class="config-modal-footer"><span id="editOutputRule">输入 3 张 → 目标输出 3 张 · 白底编辑图</span><div><a class="ghost-btn" href="quality.html">取消</a><button type="submit" class="primary-btn">提交编辑图任务</button></div></footer>
+      </form>
+    </section>
+  </main>
+  <div class="toast" id="editConfigToast" role="status"></div>
+  <script src="image-edit.js"></script>
+</body>
+</html>

@@ -57,12 +57,12 @@
 
         <section class="task-panel">
           <div class="panel-header">
-            <div class="panel-title-group"><h2>任务列表</h2><span>数据更新于刚刚</span></div>
+            <div class="panel-title-group"><h2>任务列表</h2><span>数据更新于刚刚</span><button class="text-btn data-stats-btn" id="openStats">数据统计</button></div>
             <div class="summary-bar" aria-label="任务概览">
-              <span>全部 <strong>26</strong></span><i></i>
-              <span class="summary-processing">处理中 <strong>8</strong></span><i></i>
-              <span class="summary-pending">待人工 <strong>5</strong></span><i></i>
-              <span class="summary-exception">异常 <strong>2</strong></span>
+              <span>全部 <strong id="summaryAll">26</strong></span><i></i>
+              <span class="summary-processing">处理中 <strong id="summaryProcessing">8</strong></span><i></i>
+              <span class="summary-pending">待人工 <strong id="summaryPending">5</strong></span><i></i>
+              <span class="summary-exception">异常 <strong id="summaryException">2</strong></span><label class="list-time-filter">任务创建时间：<select id="listTimeFilter" aria-label="筛选任务创建时间"><option value="all">全部</option><option value="today">今天</option><option value="yesterday">昨天</option><option value="seven">近 7 天</option><option value="this-week">本周</option><option value="last-week">上周</option><option value="month">本月</option></select></label>
             </div>
           </div>
           <div class="filters">
@@ -93,6 +93,8 @@
     <div class="drawer-body" id="drawerBody"></div>
     <footer><button class="ghost-btn" id="drawerCancel">关闭</button><button class="primary-btn" id="drawerAction">继续处理</button></footer>
   </aside>
+
+  <div class="modal-overlay" id="statsModal" hidden><section class="modal stats-modal" role="dialog" aria-modal="true" aria-labelledby="statsModalTitle"><header><div><span class="drawer-kicker">生产任务</span><h2 id="statsModalTitle">数据统计</h2></div><button class="icon-btn stats-close" aria-label="关闭"><svg><use href="#i-close"/></svg></button></header><div class="modal-body"><p class="stats-description">基于任务创建时间，统计任务在各阶段的图片流转结果。</p><div class="stats-period-controls"><label>统计周期<select id="statsPeriodFilter"><option value="today">今天</option><option value="yesterday">昨天</option><option value="seven">近 7 天</option><option value="this-week">本周</option><option value="last-week">上周</option><option value="month">本月</option><option value="custom">自定义日期</option></select></label><span>统计口径：按任务创建时间</span><div id="statsCustomRange" hidden><input id="statsPeriodStart" type="date" aria-label="统计开始日期"><b>至</b><input id="statsPeriodEnd" type="date" aria-label="统计结束日期"></div></div><section class="stats-block"><h3>任务概览</h3><div class="stats-overview"><div><span>全部任务</span><b id="statsAll">0</b></div><div><span>处理中</span><b id="statsProcessing">0</b></div><div><span>待人工</span><b id="statsPending">0</b></div><div><span>异常</span><b id="statsException">0</b></div></div></section><section class="stats-block"><h3>图片流转</h3><div class="stats-funnel"><div><span>上传原图</span><b id="statsUploaded">0 张</b></div><i>↓</i><div><span>AI 初筛输出</span><b id="statsScreened">0 张</b></div><i>↓</i><div><span>图片处理提交</span><b id="statsProcessed">0 张</b></div><i>↓</i><div><span>成图质检通过</span><b id="statsPassed">0 张</b></div><i>↓</i><div><span>2D 已入库</span><b id="statsInbound">0 张</b></div><i>↓</i><div><span>已发起 3D</span><b id="stats3d">0 张</b></div></div></section><section class="stats-block"><h3>时效统计</h3><p class="stats-duration" id="statsDuration">平均全流程耗时：0 分钟</p><p class="stats-note">同一任务按创建时间归入统计周期；后续阶段可在周期外完成。</p></section></div><footer><button class="ghost-btn stats-close">关闭</button></footer></section></div>
 
   <div class="modal-overlay" id="uploadModal" hidden>
     <section class="modal" role="dialog" aria-modal="true" aria-labelledby="uploadTitle">
